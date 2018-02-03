@@ -106,11 +106,7 @@ void process(Doc* doc,int y,int x,trie* dict)
 		case KEY_UP:
 			move(y-1,x);
 			break;
-		/*case 9:
-			
-			break;*/
 		case 10: //enter
-			//enter(doc,x,y);
 			move(y+1,0);
 			//hline(' ',80);
 			insertln();
@@ -452,66 +448,9 @@ void getcommand(Doc* b,int y, int x)
 		case KEY_UP:
 			move(0,0);
 			break;
-		case 9:
-			searchtext(b);
 		default:
 			return;
 	}
 }
 
 
-void searchtext(Doc* b)
-{
-	int c;
-	trie* tree=create();
-	int i=3;
-	char s[30];
-	int j=0,count=0;
-	int len=11;
-	int k;
-	move(23,len);
-	char find[30];
-	c=getch();
-	while(1)
-	{
-		if(c=='-')
-			break;
-		insch(c);
-		move(23,len++);
-		find[count++]=c;
-		c=getch();
-	}
-	find[count]='\0';
-
-	
-	for(int k=0;k<30;k++)
-	{
-		s[i]='\0';
-	}
-	while(i!=b->current->point)
-	{
-		if(i==b->current->gapStart)
-			i=b->current->gapEnd+1;
-		
-		if(b->current->text[i]==' ')
-		{
-			i++;
-			for(k=0;k<30;k++)
-				s[k]='\0';
-			while(b->current->text[i]!=' ')
-			{
-				if(i==b->current->gapStart)
-					i=b->current->gapEnd+1;
-				s[j++]=b->current->text[i++];
-				//printw("%c",b->current->text[i++]);
-			}
-			s[j]='\0';
-			j=0;
-			//printw("%s",s);
-			insert(tree,s);
-		}
-		
-	}	
-	if(search(tree,find))
-		printw("found");
-}
